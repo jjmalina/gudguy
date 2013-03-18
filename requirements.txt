@@ -1,0 +1,7 @@
+IrcTK==0.2.7
+fudge==1.0.3
+pyflakes==0.6.1
+requests==1.1.0
+simplejson==3.1.0
+soundcloud==0.3.6
+wsgiref==0.1.2

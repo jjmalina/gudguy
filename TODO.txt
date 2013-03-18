@@ -1,0 +1,4 @@
+Stuff to implement
+------------------
+/r/gifs search
+gifbin search
