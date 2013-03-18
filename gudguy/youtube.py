@@ -9,7 +9,7 @@ video_url = "http://youtube.com/watch?v={0}"
 
 @bot.command('yt')
 @bot.command
-def youtube_search(context):
+def youtube(context):
     res = requests.get(search_api_url, params={'q': context.args})
     if not res.status_code == 200:
         return 'Error making request'
