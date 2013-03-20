@@ -45,4 +45,4 @@ def giphy(context):
     gifs = search_gifs(query)
     if not gifs:
         return 'Welp.'
-    return get_gif(gifs, **opts)['thumbnail_url']
+    return get_gif(gifs, **opts)['image_original_url']
