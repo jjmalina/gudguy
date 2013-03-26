@@ -1,3 +1,7 @@
+Fixes
+-----
+Reconnect on timeouts or waking from sleep
+
 Stuff to implement
 ------------------
 /r/gifs search
