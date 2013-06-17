@@ -1,3 +1,7 @@
+Fixes
+------------------
+Update Giphy API - https://github.com/Giphy/GiphyAPI
+
 Stuff to implement
 ------------------
 /r/gifs search
