@@ -1,32 +1,33 @@
 # -*- coding: utf-8 -*-
 
 """
-Consume the Giphy API -- http://giphy.com/
-i.e. 'http://giphy.com/api/gifs?tag=cat'
+Consume the Giphy API -- https://github.com/Giphy/GiphyAPI
+i.e. 'http://api.giphy.com/v1/gifs/translate?s=superman&api_key=dc6zaTOxFJmzC'
 """
 import random
 import requests
 import urllib
 
 from gudguy import bot
-from gudguy.utils import timestamp_utcnow
+from gudguy.utils import response_json_or_none
 
-GIPHY_API = 'http://giphy.com/api'
-
-
-def search_api_url(**kwargs):
-    endpoint = '/gifs?%s' % (urllib.urlencode(kwargs))
-    return GIPHY_API + endpoint
+GIPHY_API = 'http://api.giphy.com/v1/gifs'
+GIPHY_KEY = 'dc6zaTOxFJmzC'
 
 
+def giphy_api_url(endpoint, **kwargs):
+    kwargs['api_key'] = GIPHY_KEY
+    return "%s%s?%s" % (GIPHY_API, endpoint, urllib.urlencode(kwargs))
+
+
+@response_json_or_none
 def search_api_request(query):
-    res = requests.get(search_api_url(tag=query))
-    return res.json() if res.status_code == 200 else None
+    return requests.get(giphy_api_url('/search', q=query))
 
 
 def search_gifs(query):
-    content = search_api_request(query)
-    return content['data'] if content is not None else None
+    json = search_api_request(query)
+    return json['data'] if (json is not None and 'data' in json) else None
 
 
 def get_gif(gifs, random_gif=False):
@@ -45,4 +46,4 @@ def giphy(context):
     gifs = search_gifs(query)
     if not gifs:
         return 'Welp.'
-    return get_gif(gifs, **opts)['image_original_url']
+    return get_gif(gifs, **opts)['images']['original']['url']
